@@ -1,0 +1,15 @@
+datadog 
+
+Your Agent is running and functioning properly. It will continue to run in the
+background and submit metrics to Datadog.
+
+If you ever want to stop the Agent, run:
+
+    sudo /etc/init.d/datadog-agent stop
+
+And to run it again run:
+
+    sudo /etc/init.d/datadog-agent start
+
+
+    

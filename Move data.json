@@ -1,0 +1,50 @@
+{
+  "objects": [
+    {
+      "period": "1 hour",
+      "name": "Every 1 hour",
+      "id": "DefaultSchedule",
+      "type": "Schedule",
+      "startAt": "FIRST_ACTIVATION_DATE_TIME"
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://sasazaki/logs/",
+      "scheduleType": "cron",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "name": "CliActivity",
+      "id": "CliActivity",
+      "runsOn": {
+        "ref": "Ec2Instance"
+      },
+      "type": "ShellCommandActivity",
+      "command": "mv s3://sasazaki/Input/notas_fiscais_II.csv.gz  s3://sasazaki/processado/"
+    },
+    {
+      "instanceType": "t1.micro",
+      "name": "Ec2Instance",
+      "id": "Ec2Instance",
+      "type": "Ec2Resource",
+      "terminateAfter": "50 Minutes"
+    }
+  ],
+  "parameters": [
+    {
+      "watermark": "aws [options] <command> <subcommand> [parameters]",
+      "description": "AWS CLI command",
+      "id": "myAWSCLICmd",
+      "type": "String"
+    }
+  ],
+  "values": {
+    "myAWSCLICmd": "mv s3://sasazaki/Input/notas_fiscais_II.csv.gz  s3://sasazaki/processado/"
+  }
+}

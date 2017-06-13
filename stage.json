@@ -1,0 +1,75 @@
+{
+  "objects": [
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "maximumRetries": "2",
+      "name": "DefaultResource1",
+      "id": "ResourceId_M1paz",
+      "type": "Ec2Resource"
+    },
+    {
+      "period": "10 minutes",
+      "name": "Every 10 minutes",
+      "id": "DefaultSchedule",
+      "type": "Schedule",
+      "startAt": "FIRST_ACTIVATION_DATE_TIME"
+    },
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "database": {
+        "ref": "DatabaseId_vT8qj"
+      },
+      "name": "Insert Summary From valores",
+      "id": "SqlActivityId_u8zse",
+      "runsOn": {
+        "ref": "ResourceId_M1paz"
+      },
+      "type": "SqlActivity",
+      "script": "insert into summary\nselect centrocusto, debito_str \nfrom szk_balancete_valores \nwhere id = '572bbf97949efb24bc17ebce'"
+    },
+    {
+      "connectionString": "drredshift.cd0jagmhlxwa.us-east-1.redshift.amazonaws.com:5439",
+      "databaseName": "sasazaki",
+      "*password": "Sasazaki@2016",
+      "name": "sasazaki",
+      "id": "DatabaseId_vT8qj",
+      "jdbcProperties": "redshiftURL = jdbc:postgresql://drredshift.cd0jagmhlxwa.us-east-1.redshift.amazonaws.com:5439",
+      "type": "RedshiftDatabase",
+      "username": "sasazaki"
+    },
+    {
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "database": {
+        "ref": "DatabaseId_vT8qj"
+      },
+      "name": "Insert Summary from ccusto",
+      "id": "SqlActivityId_CVSNV",
+      "runsOn": {
+        "ref": "ResourceId_M1paz"
+      },
+      "type": "SqlActivity",
+      "script": "insert into summary select centrocusto, debito_str from szk_balancete_ccusto\nwhere id_szk_balacente_valores = '572bbf97949efb24bc17ebce' "
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "schedule": {
+        "ref": "DefaultSchedule"
+      },
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://sasazaki/log",
+      "scheduleType": "cron",
+      "name": "Default",
+      "id": "Default"
+    }
+  ],
+  "parameters": []
+}

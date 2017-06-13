@@ -1,0 +1,137 @@
+esbload-prd-algar1:
+  image: 'domrock/esbloadremote:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-algar
+    - HZ_GROUP_PASSWORD=password-algar
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-algar
+    - 'JAVA_OPTS=-Xmx1024m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled'
+    - SMTP_PASSWORD=Dr.1234@
+  links:
+    - hazelcast-prd-algar
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '8080'
+  restart: always
+  tags:
+    - LOAD1
+  volumes:
+    - '/var/domrock/esbload-prd-algar1/logs:/var/domrock/esb/logs'
+esbload-prd-algar2:
+  image: 'domrock/esbloadremote:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-algar
+    - HZ_GROUP_PASSWORD=password-algar
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-algar
+    - 'JAVA_OPTS=-Xmx1024m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled'
+    - SMTP_PASSWORD=Dr.1234@
+  links:
+    - hazelcast-prd-algar
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '8080'
+  restart: always
+  tags:
+    - LOAD2
+  volumes:
+    - '/var/domrock/esbload-prd-algar2/logs:/var/domrock/esb/logs'
+esbload-prd-algar3:
+  image: 'domrock/esbloadremote:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-algar
+    - HZ_GROUP_PASSWORD=password-algar
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-algar
+    - 'JAVA_OPTS=-Xmx1024m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled'
+    - SMTP_PASSWORD=Dr.1234@
+  links:
+    - hazelcast-prd-algar
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '8080'
+  restart: always
+  tags:
+    - LOAD3
+  volumes:
+    - '/var/domrock/esbload-prd-algar3/logs:/var/domrock/esb/logs'
+esbweb-prd-algar:
+  image: 'domrock/esbweb:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ARMEN_DATABASEMASTER=armen-algar
+    - 'ARMEN_EMAILADMIN=roberto.goncalves@domrock.com.br, eduardo.pin@domrock.com.br'
+    - ARMEN_HEADERLENGTH=50
+    - ARMEN_LOGINPAGE=domrock
+    - ARMEN_MAXIMUMNUMBEROFLOGINFAILURESBYADDRESS=100
+    - ARMEN_MAXIMUMNUMBEROFLOGINFAILURESBYEMAIL=4
+    - ARMEN_PERMANENCETIMEINBLACKLIST=10
+    - ARMEN_TIMEFAILURESTATUS=60
+    - AWSS3_ACCESSKEY=XXXXXX
+    - AWSS3_BUCKETDEFAULT=domrock
+    - AWSS3_REGIONNAME=us-east-1
+    - AWSS3_SECRETKEY=XXXXXX
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-algar
+    - HZ_GROUP_PASSWORD=password-algar
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-algar
+    - MONGODB_DATABASE=admin
+    - MONGODB_PASSWORD=YbXaPsWFZz2P8vWmGKaBbqLQL
+    - 'MONGODB_URI=mongodb://mongoprd1:27017,mongoprd2:27017'
+    - MONGODB_USER=backend
+    - REDSHIFT_DRIVER=com.amazon.redshift.jdbc41.Driver
+    - REDSHIFT_PASSWORD=XXXXXX
+    - 'REDSHIFT_URI=jdbc:redshift://drredshift.cd0jagmhlxwa.us-east-1.redshift.amazonaws.com:5439'
+    - REDSHIFT_USER=XXXXXX
+    - SMTP_PASSWORD=Dr.1234@
+    - SMTP_USER=mensagem@domrock.com.br
+    - SQL_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    - SQL_PASSWORD=I;O11EPJGpl|wf9HO^X
+    - 'SQL_URI=jdbc:sqlserver://drsprd.eastus2.cloudapp.azure.com:14334'
+    - SQL_USER=backend
+    - VIRTUAL_HOST=algar.domrock.com.br
+    - ZENDESK_PASSWORD=Dr.1234@
+    - ZENDESK_USERNAME=suporte@domrock.com.br
+  links:
+    - hazelcast-prd-algar
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '80'
+  restart: always
+  tags:
+    - WEB
+  target_num_containers: 2
+hazelcast-prd-algar:
+  image: 'domrock/hazelcast:latest'
+  environment:
+    - HZ_ENABLE_MANCENTER=false
+    - HZ_GROUP_NAME=group-algar
+    - HZ_GROUP_PASSWORD=password-algar
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-algar
+  ports:
+    - '5701'
+    - '8080'
+  restart: always
+  tags:
+    - DB
+  target_num_containers: 2

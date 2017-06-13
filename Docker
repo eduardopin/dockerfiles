@@ -1,0 +1,43 @@
+#Docker
+
+[18:59:06] Roberto da Trindade Gonçalves: pcKsgGJ16q3AFkyFUadPdFVy   -- Senha docker
+[18:59:50] Roberto da Trindade Gonçalves: https://esbar.domrock.com.br:8443/repository
+
+
+
+ARCHIVA_USER = docker
+ARCHIVA_PASSWORD = pcKsgGJ16q3AFkyFUadPdFVy
+ARCHIVA_URL = https://esbar.domrock.com.br:8443/repository
+
+ HZ_GROUP_NAME =group-xxxx-xxxx
+ HZ_GROUP_PASSWORD = password-xxx-xxxx
+
+ LINKS Associados... 
+
+ESBWEB
+Links 
+hazelcast-teste-demo	HAZELCAST-TESTE-DEMO	
+mongodb-teste	MONGODB-TESTE
+
+
+
+MONGODB_HOST	mongodb-teste
+MONGO PASSWORD  bV4yPsWFZz2P8vWmGKa7XHLQL
+ARCHIVA_PASSWORD	pcKsgGJ16q3AFkyFUadPdFVy	
+ ARCHIVA_URL	https://esbar.domrock.com.br:8443/repository	
+ ARCHIVA_USER	docker	
+ ARMEN_DATABASEMASTER	armen-demo	
+ ARMEN_LOGINPAGE	domrock	
+ HZ_GROUP_NAME	group-teste-demo	
+ HZ_GROUP_PASSWORD	password-teste-demo	
+ MONGODB_USER	backend	
+ MSSQL_HOST	demo.domrock.com.br
+ MSSQL_PASSWORD	••••••	
+ MSSQL_USER	domrock	
+ SQL_PASSWORD	Qw9n83T6NR5m3Pgkfhh6Mt6Gh	
+ SQL_URL	jdbc:sqlserver://demo.domrock.com.br:1433	
+ SQL_USER	domrock	
+ VIRTUAL_HOST	esbteste-demo.domrock.com.br
+
+
+

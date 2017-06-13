@@ -1,0 +1,88 @@
+esbload-prd-demo:
+  image: 'domrock/esbloadremote:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-demo
+    - HZ_GROUP_PASSWORD=password-demo
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-demo
+    - 'JAVA_OPTS=-Xmx1024m -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled'
+    - SMTP_PASSWORD=Dr.1234@
+  links:
+    - hazelcast-prd-demo
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '8080'
+  restart: always
+  tags:
+    - LOAD
+  target_num_containers: 4
+esbweb-prd-demo:
+  image: 'domrock/esbweb:latest'
+  environment:
+    - ARCHIVA_PASSWORD=pcKsgGJ16q3AFkyFUadPdFVy
+    - 'ARCHIVA_URL=https://esbar.domrock.com.br:8443/repository'
+    - ARCHIVA_USER=docker
+    - ARMEN_DATABASEMASTER=armen-demo
+    - 'ARMEN_EMAILADMIN=roberto.goncalves@domrock.com.br, eduardo.pin@domrock.com.br'
+    - ARMEN_HEADERLENGTH=50
+    - ARMEN_LOGINPAGE=domrock
+    - ARMEN_MAXIMUMNUMBEROFLOGINFAILURESBYADDRESS=100
+    - ARMEN_MAXIMUMNUMBEROFLOGINFAILURESBYEMAIL=4
+    - ARMEN_PERMANENCETIMEINBLACKLIST=10
+    - ARMEN_TIMEFAILURESTATUS=60
+    - AWSS3_ACCESSKEY=XXXXXX
+    - AWSS3_BUCKETDEFAULT=domrock
+    - AWSS3_REGIONNAME=us-east-1
+    - AWSS3_SECRETKEY=XXXXXX
+    - ESB_VERSION=1.1-SNAPSHOT
+    - HZ_GROUP_NAME=group-demo
+    - HZ_GROUP_PASSWORD=password-demo
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-demo
+    - MONGODB_DATABASE=admin
+    - MONGODB_PASSWORD=YbXaPsWFZz2P8vWmGKaBbqLQL
+    - 'MONGODB_URI=mongodb://mongoprd1:27017,mongoprd2:27017'
+    - MONGODB_USER=backend
+    - REDSHIFT_DRIVER=com.amazon.redshift.jdbc41.Driver
+    - REDSHIFT_PASSWORD=XXXXXX
+    - 'REDSHIFT_URI=jdbc:redshift://drredshift.cd0jagmhlxwa.us-east-1.redshift.amazonaws.com:5439'
+    - REDSHIFT_USER=XXXXXX
+    - SMTP_PASSWORD=Dr.1234@
+    - SMTP_USER=mensagem@domrock.com.br
+    - SQL_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    - SQL_PASSWORD=Qw9n83T6NR5m3Pgkfhh6Mt6Gh
+    - 'SQL_URI=jdbc:sqlserver://andersentax.eastus.cloudapp.azure.com:1433'
+    - SQL_USER=domrock
+    - VIRTUAL_HOST=esb-demo.domrock.com.br
+    - ZENDESK_PASSWORD=Dr.1234@
+    - ZENDESK_USERNAME=suporte@domrock.com.br
+  links:
+    - hazelcast-prd-demo
+    - 'mongoprd1.MongoPRD:mongoprd1'
+    - 'mongoprd2.MongoPRD:mongoprd2'
+  ports:
+    - '80'
+  restart: always
+  tags:
+    - WEB
+  target_num_containers: 2
+hazelcast-prd-demo:
+  image: 'domrock/hazelcast:latest'
+  environment:
+    - HZ_ENABLE_MANCENTER=false
+    - HZ_GROUP_NAME=group-demo
+    - HZ_GROUP_PASSWORD=password-demo
+    - HZ_SERVICE_COUNT=2
+    - HZ_SERVICE_NAME=hazelcast-prd-demo
+  ports:
+    - '5701'
+    - '8080'
+  restart: always
+  tags:
+    - DB
+  target_num_containers: 2
